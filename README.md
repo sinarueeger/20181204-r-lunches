@@ -1,5 +1,7 @@
-# Presentation at R lunches in Geneva
+# Presentation at R lunchs in Geneva
 
-20181204-r-lunches
+Presentation at R lunchs 4 December 2018.
 
-For R lunches in Geneva, details [here](http://use-r-carlvogt.github.io/prochains-lunchs/).
+Announcment is [here](http://use-r-carlvogt.github.io/prochains-lunchs/).
+
+Slides are [here]().
