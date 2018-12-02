@@ -17,7 +17,7 @@ class: top, right, title-slide
 # Workflow &amp; best practices for projects
 ## Download example scripts here: <a href="https://github.com/sinarueeger/workflow-example/">http://bit.ly/2O15oom</a>
 ### Sina Rüeger
-### 2018-12-04 (updated: 2018-11-20)
+### 2018-12-04 (updated: 2018-12-02)
 
 ---
 
@@ -27,8 +27,7 @@ class: top, right, title-slide
 
 
 
----
-layout: true
+
 
 
 ---
@@ -36,62 +35,32 @@ class: left, middle
 
 # About me
 
-- Background in Data Analysis &amp; Engineering
+- Background in Data Analysis &amp; Engineering.
 
-- PostDoc @ EPFL <i class="ion  ion-arrow-right-a "></i> Analysis of genetic data in infectious diseases at the [Fellay Lab](https://fellay-lab.epfl.ch/).
+- In the past: I worked as a research assistant in a data science environment, in epidemiology and in statistical genetics. 
 
-- <i class="fab  fa-r-project " style="color:#88398a;"></i>-Ladies Lausanne co-organiser
+- Right now: PostDoc @ EPFL <i class="ion  ion-arrow-right-a "></i> Analysis of genetic data in infectious diseases at the [Fellay Lab](https://fellay-lab.epfl.ch/).
+
+- <i class="fab  fa-r-project " style="color:#88398a;"></i>-Ladies Lausanne co-organiser.
 
 
---
 
-- <i class="ion  ion-heart "></i> Data analysis &amp; Genetic data &amp; Data visualisation
+---
+class: left, middle
 
-- <i class="fas  fa-question "></i> `usethis` package
+# Inspiration
+
+- [**R-Ladies Remote Journal Club**](https://twitter.com/acastillogill/status/1067699852048510976) where we discussed *Good enough practices in scientific computing* [Wil+17]. 
+
+- **rOpenSci Community call**: *Code Review in the Lab* rOpenSci [Ope18] and the [summary](https://ropensci.org/blog/2018/11/29/codereview/) of it.
+
+- Plus all the [references](#references) listed at the end.
+
 
 ---
 class: center, middle, inverse
 
-# My everyday work
-
-
----
-class: left, middle
-
-# What is the goal? 
-
-1. Get the work done
-1. Enable others to use your work (&gt; otherwise its lost work)
-
-
----
-class: left, middle
-
-# Is that working in research? 
-
-cite stodden
-
----
-class: left, middle
-
-# What are the problems? 
-
----
-class: left, middle
-
-# What are solutions?
-
-- make/drake (for sequential execution)
-- git/version control
-- R projects
-- online tools (stodden)
-- R markdown
-- packrat
-- docker
-- projectTemplate
-- indenting + styleguides
-- code review
-
+# Life cycle of projects
 
 
 ---
@@ -118,55 +87,60 @@ class: left, middle
 
 .small[Adapted from Figure in [R4DS book](http://r4ds.had.co.nz/explore-intro.html)]
 
----
-class: inverse, center, middle
 
-.big[&lt;font face="Yanone Kaffeesatz"&gt; Tidying workflows &lt;/font&gt;] &lt;!------<i class="fas  fa-smile "></i> ----------&gt;
+
 
 ---
-class: left, top
+class: left, middle
 
-# The challenges
+# Goal
 
-- Making it easy for other colleagues to **rerun** (and **understand**) the project → *"repeatability"*
+### 1. Getting the data analysis done.
 
---
+### 2. Telling others
 
-- Publishing code 
-  - making it easy for others to **rerun** and to **understand** the project → [*"reproducibility"*](https://twitter.com/jtleek/status/759822823552606208)
-  - making it easy for others to rerun the code **with different data** → [*"replicability"*](https://twitter.com/jtleek/status/759822823552606208)
+- Making it easy for yourself &amp; colleagues to **rerun** (and **understand**) the project → *"repeatability"*. 
+- Publishing code: 
+    - making it easy for others to **rerun** and to **understand** the project → [*"reproducibility"*](https://twitter.com/jtleek/status/759822823552606208). 
+    - making it easy for others to rerun the code **with different data** → [*"replicability"*](https://twitter.com/jtleek/status/759822823552606208). 
 
---
 
-- Keeping up with **new data deliveries**, changing data formats, generally, data chaos. 
+---
+class: left, middle
 
---
+# Is that working? 
 
-- Having an **overview of the analysis and its iteration steps** → cleaning, modelling, visualisation, reports.
 
---
+.small[*Enhancing reproducibility for computational methods* Stodden, McNutt, Bailey, Deelman, Gil, Hanson, Heroux, Ioannidis, and Taufer [Sto+16]]
 
-- Separating `data`, `processed-data` and `output-data`
+---
+class: left, middle 
+exclude: true
 
---
+# Problems
 
-- Having **different places** for computation (PC, Server1, Server2).
+- Computers (Servers, OS, )
+- Trained for domain x and not computing
 
---
 
-- Using similar code in many different R scripts → **redundant** code 
+---
+class: left, middle
+
+# Best practices
+
+
+### Data management
+### Code
+### Project organisation 
+### Version control
+
+.small[A selection from *Good enough practices in scientific computing* Wilson, Bryan, Cranston, et al. [Wil+17]]
+
 
 ---
 class: center, middle
 
-&lt;img border="0" alt="" src="https://imgs.xkcd.com/comics/data_pipeline.png" width="800"&gt;
-
-.small[Source: https://imgs.xkcd.com/comics/data_pipeline.png]
-
----
-class: center, middle
-
-# There is no magic solution
+# ...extremely well organised scientists
 
 &lt;a href="https://docs.google.com/presentation/d/1VK1hngMZSY3FT2SrDd4_AHiB28CHrsuSsaFr7r3SAL8/edit#slide=id.p"&gt;
 &lt;img border="0" alt="" src="img/heidibaya.png" width="800"&gt;
@@ -174,6 +148,449 @@ class: center, middle
 
 .small[Extract from presentation by Heidi Seibold @HeidiBaya on [*Tools for reproducibility in Statistics and Machine Learning*](https://docs.google.com/presentation/d/1VK1hngMZSY3FT2SrDd4_AHiB28CHrsuSsaFr7r3SAL8/edit#slide=id.p)]
 
+
+---
+class: left, middle
+exclude: true
+
+# What are solutions?
+
+### Data Management
+    - `janitor`
+
+### Code
+    - Style guides (`lintr`, `formatr`, `styler`)
+    - `bannerCommenter`
+    - work with rstudio projects and `here::here()`
+    
+### Project Organisation 
+    - runall script: `drake`
+    - directory structur: `ProjectTemplate`, `pRojects`, `rrtools`
+
+### Version control / git
+
+
+---
+class: left, middle
+
+# R package folder structure
+
+&lt;a href="http://r-pkgs.had.co.nz/package.html"&gt;
+&lt;img border="0" alt="" src="img/package-files.png" width="500"&gt;
+&lt;/a&gt;
+
+.small[Figure from http://r-pkgs.had.co.nz/package.html.]
+
+
+---
+class: left, middle
+
+# Code recognition
+
+- Having an **overview of the analysis and its iteration steps** → cleaning, modelling, visualisation, reports.
+
+- Well styled code makes it easier to apply **code review**.
+
+
+&lt;!-----------------------------------&gt;
+
+---
+class: inverse, center, middle
+
+.large[Data Management]
+
+---
+class: left, middle
+
+## Create data
+
+&gt; *Create the data you wish to see in the world* [Wil+17]
+
+- Pay attention to variable names
+- Use a data dictionary / codebook (variable meta data)
+- Use and create analysis friendly data
+
+
+---
+class: left, middle
+
+## `library(janitor)`
+
+```
+library(janitor)
+## remove empty table
+janitor::remove_empty()
+
+## remove duplicates
+janitor::get_dupes(whatever, ID)
+
+## clean names
+iris %&gt;% names()
+janitor::clean_names(iris, case = "parsed") %&gt;% names()
+```
+
+
+---
+class: left, middle
+
+## More
+
+- `library(readxl)` and `library(googlesheets)` to work with spreadsheet data. 
+
+- [`library(dataMeta)`](https://cran.r-project.org/web/packages/dataMeta/vignettes/dataMeta_Vignette.html) to create meta data of variables.
+
+
+
+
+&lt;!-----------------------------------&gt;
+
+
+---
+class: inverse, center, middle
+
+.large[Code]
+
+---
+class: left, middle
+
+## Why styling code? 
+
+code can be misunderstood for two reasons: bad styling, bad coding
+
+code is reviewable: 
+
+---
+class: left, middle
+
+## In-built options in RStudio
+
+- **Reindent** Lines (Cmd+I) → proper indenting
+
+- **Reformat** Code (Cmd+Shift+A) → adds spaces, breaks long horizontal code
+
+
+
+---
+class: left, middle
+
+## Style guides
+
+- styleguides: give variables and functions meaningful names
+- RStudio in-built functions
+- [`library(formatr)`](https://yihui.name/formatr/) 
+- [`library(styler)`](https://github.com/r-lib/styler) (RStudio add-in) 
+- [`library(lintr)`](https://github.com/jimhester/lintr) → pretty sophisticated, static code analysis
+
+---
+class: left, middle
+
+### `library(formatr)`
+
+Some more details on [Yihui Xie page](https://yihui.name/formatr/) and make sure you read *6. Further Notes* on what bad can happen. 
+
+- `formatR::tidy_file("mycode.R")` will change the R file
+
+- `formatR::tidy_source("mycode.R")` will output the styled R code
+
+
+---
+class: left, middle
+
+### Bad code
+
+
+```r
+make.background=function(N,filename){
+cols &lt;- c("#88398A","#B07FB2","#F7CCA4","#C8C05E","#627C63") ## generated here: http://colormind.io/
+
+## colors
+set.seed(3)
+N=2000
+df=data.frame(x=runif(N), y =runif(N), col = sample(cols, N, replace = TRUE), size=runif(N, 1, 10))
+
+## no border
+qp &lt;- ggplot(df, aes(x, y))+ geom_point(aes(size = size, fill = I(col), color = I(col)), alpha = 0.4, shape = 16) + theme_void() +theme(legend.position="none")+scale_size_continuous(range = c(1, 30))
+
+return(qp)
+}
+```
+
+
+---
+class: left, middle
+
+### Better code
+
+
+```r
+formatR::tidy_source("mycode.R", blank = FALSE, 
+    arrow = TRUE, width.cutoff = 50)
+```
+
+```
+## makes the viz for the poster
+make.background &lt;- function(N, filename) {
+    cols &lt;- c("#88398A", "#B07FB2", "#F7CCA4", "#C8C05E", 
+        "#627C63")  ## generated here: http://colormind.io/
+    ## colors
+    set.seed(3)
+    N &lt;- 2000
+    df &lt;- data.frame(x = runif(N), y = runif(N), col = sample(cols, 
+        N, replace = TRUE), size = runif(N, 1, 10))
+    ## no border
+    qp &lt;- ggplot(df, aes(x, y)) + geom_point(aes(size = size, 
+        fill = I(col), color = I(col)), alpha = 0.4, 
+        shape = 16) + theme_void() + theme(legend.position = "none") + 
+        scale_size_continuous(range = c(1, 30))
+    return(qp)
+}
+```
+
+---
+class: left, middle
+
+### `library(styler)`
+
+Follows tidyverse styling rules. 
+
+
+```r
+styler::style_file("mycode.R")
+```
+
+```
+Styling  1  files:
+ mycode.R ✔ 
+────────────────────────────────────────
+Status	Count	Legend 
+✔ 	1	File unchanged.
+ℹ 	0	File changed.
+✖ 	0	Styling threw an error.
+────────────────────────────────────────
+```
+
+---
+class: left, middle
+
+### `library(lintr)`
+
+
+```r
+lintr::lint("mycode.R")
+```
+
+
+
+
+---
+class: left, middle
+
+## `libary(bannerCommenter)`
+
+- For a consistent **commenting style**.
+
+- Checkout [bannerCommenter-vignette](https://cran.r-project.org/web/packages/bannerCommenter/vignettes/Banded_comment_maker.pdf) for more options. 
+
+- Main function is `bannerCommenter::banner()`
+
+
+---
+class: left, middle
+
+
+
+```r
+bannerCommenter::banner("This is an R-script Title", 
+    "and this is a subtitle", emph = TRUE, 
+    numLines = 3)
+```
+
+```
+
+###########################################################################
+###########################################################################
+###########################################################################
+###                                                                     ###
+###                                                                     ###
+###                      THIS IS AN R-SCRIPT TITLE                      ###
+###                        AND THIS IS A SUBTITLE                       ###
+###                                                                     ###
+###                                                                     ###
+###########################################################################
+###########################################################################
+###########################################################################
+```
+
+
+---
+class: left, middle
+
+
+
+```r
+bannerCommenter::banner("Section", centre = TRUE, 
+    bandChar = "/", minHashes = 70)
+```
+
+```
+
+##/////////////////////////////////////////////////////////////////////
+##                              Section                              //
+##/////////////////////////////////////////////////////////////////////
+```
+
+---
+class: left, middle
+
+
+
+```r
+bannerCommenter::banner("Subsection", centre = FALSE, 
+    snug = TRUE, bandChar = "-")
+```
+
+```
+
+##----------------
+##  Subsection  --
+##----------------
+```
+
+
+---
+class: left, middle
+
+
+
+```r
+bannerCommenter::open_box("Important note", 
+    bandChar = ":")
+```
+
+```
+
+##::::::::::::::::::
+##  Important note  
+##::::::::::::::::::
+```
+
+
+---
+class: left, middle
+
+### Lots of more options
+
+- *emph*: bigger, bolder banner
+- *snug*: box close fitting
+- *upper*: text in upper case
+- *centre*: text in centre
+- *leftSideHashes*: nbr of hash characters to the left
+- *rightSideHashes*: nbr of hash characters to the right
+- *minHashes*: length of bands (e.g. 80)
+- *numLines*: nbr of lines
+- *bandChar*: type of character
+
+   
+---
+class: left, middle
+
+## More
+
+- Work with RStudio projects and `here::here()` (if you need convincing, checkout [this blogpost](https://malco.io/2018/11/05/why-should-i-use-the-here-package/)).
+
+- More on style guides: 
+  - http://adv-r.had.co.nz/Style.html
+  - http://jef.works/R-style-guide/#file-names
+
+
+ 
+&lt;!-----------------------------------&gt;
+---
+class: inverse, center, middle
+
+.large[Project management]
+
+
+---
+class: left, middle
+
+## Directory structure
+
+- vs. R package
+- [`library(ProjectTemplate)`](http://projecttemplate.net/architecture.html)
+- [`library(pRojects)`](https://itsalocke.com/projects/)
+- `rrtools::use_analysis()`
+
+
+---
+class: left, middle
+
+## Runall script
+
+- runall script in bash
+- runall script in R
+- `drake`
+
+
+
+
+---
+class: left, middle
+
+## More
+
+- Directory: https://nicercode.github.io/about/
+- Directory: https://twitter.com/EmilyRiederer/status/1038982918033604609?s=09
+- Runall: https://github.com/jdblischak/workflowr
+- Runall: https://www.tidyverse.org/articles/2017/12/workflow-vs-script/
+- Runall:  https://github.com/richfitz/remake
+
+&lt;!-----------------------------------&gt;
+---
+class: inverse, center, middle
+
+.large[Version control]
+
+
+
+---
+class: left, middle
+
+# Version control
+
+- http://happygitwithr.com/bingo.html
+
+- Get private folders (free for students at github)
+
+
+&lt;!-----------------------------------&gt;
+
+---
+class: left, middle
+
+# Tips
+
+1. Work with others
+
+1. Use gist.github.io to memorise stuff, see https://gist.github.com/sinarueeger/ee42a74cbcb1d834e906199b26bc19f0
+
+```
+## Add banner comments to R scripts using 
+## [bannerCommenter](https://cran.r-project.org/web/packages/bannerCommenter/vignettes/Banded_comment_maker.pdf).
+
+## header -----------------------------
+bannerCommenter::banner("G2G-EBV analysis using GASTON", emph = TRUE)
+
+## section -----------------------------
+bannerCommenter::banner("0. Setup", centre = TRUE, bandChar = "/")
+
+## subsection -----------------------------
+bannerCommenter::banner("0.1 Setup", centre = FALSE, bandChar = "-")
+
+## note -----------------------------
+bannerCommenter::open_box("Variables need to be defined", bandChar = ":")
+
+```
 
 
 
@@ -192,17 +609,6 @@ class: left, middle
 
 - **Minimising** redundant computation → **caching** results.
 
-
----
-class: left, middle
-
-# R package folder structure
-
-&lt;a href="http://r-pkgs.had.co.nz/package.html"&gt;
-&lt;img border="0" alt="" src="img/package-files.png" width="500"&gt;
-&lt;/a&gt;
-
-.small[Figure from http://r-pkgs.had.co.nz/package.html.]
 
 ---
 class: center, middle, inverse
@@ -414,10 +820,11 @@ class: left, middle
 ## .drake/
 
 
+
 ---
 class: left, top
 
-## Resources
+# Resources
 
 - [Github Repo](https://github.com/ropensci/drake)
 
@@ -431,12 +838,37 @@ class: left, top
 
 - [Cheatsheet](https://github.com/krlmlr/drake-sib-zurich/blob/master/cheat-sheet.pdf).
 
+
 ---
-class: inverse, center, middle
+class: left, middle
 
-.big[&lt;font face="Yanone Kaffeesatz"&gt; Diversity in the R community &lt;/font&gt;] &lt;!------<i class="fas  fa-smile "></i> ----------&gt;
+# More
 
+- https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375986
+- https://benmarwick.github.io/UO-2018-On-Ramps-to-Reproducibility/UO-2018-On-Ramps-to-Reproducibility.html#1
 
+---
+class: left, middle
+
+# References
+
+rOpenSci (2018). "Code Review in the Lab". Community Call. URL:
+[https://ropensci.org/commcalls/2018-10-16/](https://ropensci.org/commcalls/2018-10-16/).
+
+Stodden, V, M. McNutt, D. H. Bailey, et al. (2016). "Enhancing
+reproducibility for computational methods". In: _Science_
+354.6317, pp. 1240-1241. ISSN: 0036-8075. DOI:
+[10.1126/science.aah6168](https://doi.org/10.1126/science.aah6168).
+eprint:
+http://science.sciencemag.org/content/354/6317/1240.full.pdf. URL:
+[http://science.sciencemag.org/content/354/6317/1240](http://science.sciencemag.org/content/354/6317/1240).
+
+Wilson, G, J. Bryan, K. Cranston, et al. (2017). "Good enough
+practices in scientific computing". In: _PLOS Computational
+Biology_ 13.6, pp. 1-20. DOI:
+[10.1371/journal.pcbi.1005510](https://doi.org/10.1371/journal.pcbi.1005510).
+URL:
+[https://doi.org/10.1371/journal.pcbi.1005510](https://doi.org/10.1371/journal.pcbi.1005510).
 
 ---
 class: inverse, center, middle
@@ -444,9 +876,9 @@ class: inverse, center, middle
 .big[&lt;font face="Yanone Kaffeesatz"&gt; Thank you! &lt;/font&gt;] &lt;!------<i class="fas  fa-smile "></i> ----------&gt;
 
 .left[
-Slides: [https://sinarueeger.github.io/20181004-geneve-rug/slides#1](https://sinarueeger.github.io/20181004-geneve-rug/slides#1)
+Slides: [https://sinarueeger.github.io/20181204-r-lunchs-gva/#1](https://sinarueeger.github.io/20181204-r-lunchs-gva/#1)
 
-Source code: [https://github.com/sinarueeger/20181004-geneve-rug/](https://github.com/sinarueeger/20181004-geneve-rug/)
+Source code: [https://github.com/sinarueeger/20181204-r-lunchs-gva/](https://github.com/sinarueeger/20181204-r-lunchs-gva/)
 
 Examples: [https://github.com/sinarueeger/workflow-example](https://github.com/sinarueeger/workflow-example)
 

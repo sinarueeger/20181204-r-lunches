@@ -7,9 +7,11 @@
 
 /* link color */
 a, a > code {
-  color: #0570b0; /*default: rgb(249, 38, 114); || sets color of links */
+  color: #627C63; /*default: rgb(249, 38, 114); || sets color of links */
   text-decoration: none; /* turns off background coloring of links */
 }
+/*cols <- c("#88398A", "#B07FB2", "#F7CCA4", "#C8C05E", "#627C63") ## generated here: http://colormind.io/*/
+
 
 body {
   font-family: 'Arvo', 'Droid Serif', 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
@@ -17,7 +19,7 @@ body {
 }
 
 .big { font-size: 730% }
-.large { font-size: 130% }
+.large { font-size: 330% }
 .small { font-size: 70% }
 .tiny { font-size: 40% }
 
@@ -36,7 +38,6 @@ body {
 h1, h2, h3 {
   font-weight: normal;
 }
-
 
 /* link color 
 
