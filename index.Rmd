@@ -105,7 +105,7 @@ class: left, middle
 
 ### 1. Figuring out stuff.
 
-### 2. Telling others
+### 2. Telling others.
 
 - Making it easy for yourself & colleagues to **rerun** (and **understand**) the project → *"repeatability"*. 
 - Publishing code: 
@@ -253,7 +253,7 @@ class: left, middle
 
 ## Why styling code? 
 
-Well *styled* code is easier reviewable. 
+Well *styled* code makes reviewing easier. 
 
 ---
 class: left, middle
@@ -263,6 +263,8 @@ class: left, middle
 - **Reindent** Lines (Cmd+I) → proper indenting
 
 - **Reformat** Code (Cmd+Shift+A) → adds spaces, breaks long horizontal code
+
+↪ apply both with` mycode.R`:
 
 
 
@@ -282,7 +284,7 @@ class: left, middle
 
 ### library(formatr)
 
-Some more details on [Yihui Xie page](https://yihui.name/formatr/) and make sure you read *6. Further Notes* on what bad can happen. 
+Some more details on [Yihui Xie page](https://yihui.name/formatr/). Make sure you read *6. Further Notes* about all the bad things that can happen. 
 
 - `formatR::tidy_file("mycode.R")` will change the R file
 
@@ -295,7 +297,7 @@ class: left, middle
 ### Bad code
 
 ```{r,tidy=FALSE,results=FALSE}
-make.background=function(N,filename){
+make.background=function(N,filename        ){
 cols <- c("#88398A","#B07FB2","#F7CCA4","#C8C05E","#627C63") ## generated here: http://colormind.io/
 
 ## colors
@@ -304,7 +306,7 @@ N=2000
 df=data.frame(x=runif(N), y =runif(N), col = sample(cols, N, replace = TRUE), size=runif(N, 1, 10))
 
 ## no border
-qp <- ggplot(df, aes(x, y))+ geom_point(aes(size = size, fill = I(col), color = I(col)), alpha = 0.4, shape = 16) + theme_void() +theme(legend.position="none")+scale_size_continuous(range = c(1, 30))
+qp <- ggplot(df, aes(x, y))+ geom_point(aes(size =size, fill =I(col), color = I(col)), alpha = 0.4, shape = 16)+theme_void()+theme(legend.position="none")+scale_size_continuous(range = c(1, 30))
 
 return(qp)
 }
@@ -316,8 +318,26 @@ class: left, middle
 
 ### Better code
 
-```{r, comment=""}
+```{r, comment="", eval =F}
 formatR::tidy_source("mycode.R", blank = FALSE, arrow = TRUE, width.cutoff = 50)
+```
+
+```{r, eval = FALSE}
+make.background <- function(N, filename) {
+    cols <- c("#88398A", "#B07FB2", "#F7CCA4", "#C8C05E", 
+        "#627C63")  ## generated here: http://colormind.io/
+    ## colors
+    set.seed(3)
+    N <- 2000
+    df <- data.frame(x = runif(N), y = runif(N), col = sample(cols, 
+        N, replace = TRUE), size = runif(N, 1, 10))
+    ## no border
+    qp <- ggplot(df, aes(x, y)) + geom_point(aes(size = size, 
+        fill = I(col), color = I(col)), alpha = 0.4, 
+        shape = 16) + theme_void() + theme(legend.position = "none") + 
+        scale_size_continuous(range = c(1, 30))
+    return(qp)
+}
 ```
 
 ---
@@ -328,18 +348,22 @@ class: left, middle
 - Follows tidyverse styling rules. 
 - RStudio add-in
 
-```{r, comment=""}
-styler::style_file("mycode.R")
-```
+↪ `mycode.R`: select parts, apply `style selection`
+
+↪ `mycode.R`: apply `style active file`
+
 
 
 ---
 class: left, middle
 
-## Liter for R code (3/4)
+## Linter for R code (3/4)
 
 - `library(lintr)`
+
 - pretty sophisticated, static code analysis
+
+- ↪ https://github.com/jimhester/lintr
 
 ```{r,eval=FALSE}
 lintr::lint("mycode.R")
@@ -440,8 +464,8 @@ class: left, middle
 ## Directory structure
 
 - [`library(ProjectTemplate)`](http://projecttemplate.net/architecture.html)
+
 - [`library(pRojects)`](https://itsalocke.com/projects/)
-- `rrtools::use_analysis()`
 
 ---
 class: left, middle
@@ -459,12 +483,83 @@ class: left, middle
 ---
 class: left, middle
 
-### [library(ProjectTemplate)](http://projecttemplate.net/architecture.html)
+### library(ProjectTemplate)
+
+- ↪ hhttp://projecttemplate.net/architecture.html
+
+- ↪ hhttp://projecttemplate.net/getting_started.html
+
+```{r, eval = FALSE}
+library(help = ProjectTemplate)
+create.project(project.name = "TB.analysis")
+```
+
+Minimal version creates folders: `cache, config, data, munge, README.md, src`
+
+```{r, eval = FALSE}
+create.project(project.name = "TB.analysis", template = "minimal")
+```
+
+```{r, eval = FALSE}
+## cd into project
+load.project()
+```
+
 
 ---
 class: left, middle
 
-### [`library(pRojects)`](https://itsalocke.com/projects/)
+### library(pRojects)
+
+- Create a project layout for an analysis project
+
+- includes support for git, packrat
+
+- ↪ https://itsalocke.com/projects/
+
+```{r, eval = FALSE}
+library(pRojects)
+createAnalysisProject(name = "TB.analysis", 
+                   title = "Analysis of TB data in NBR individuals of SOMENAME cohort", 
+                   folder = "/Users/rueger/Documents", 
+                   git = TRUE,
+                   external_setup = NULL)
+```
+
+Customise: 
+```{r, eval = FALSE}
+
+createAnalysisProject(name = "TB.analysis", 
+                      title = "Analysis of TB data in NBR individuals of SOMENAME cohort", 
+                      folder = "/Users/rueger/Documents", 
+                      git = TRUE,
+                      external_setup = NULL,
+                      dirs = c("data", "docs", "output", "src", "report"))
+
+```
+
+
+---
+class: left, middle
+
+### Self baked
+
+
+```
+yourproject/
+├── README.md
+├── code
+│   ├── A_dataprep.R
+│   ├── B_fit.R
+│   └── functions.R
+├── data
+│   ├── raw
+│   ├── processed
+│   ├── results
+├── report
+│   └── report.Rmd
+└── yourproject.Rproj
+```
 
 
 
@@ -475,6 +570,7 @@ class: left, middle
 
 - runall script in `.R`
 - runall script in `.sh`
+- Makefile
 - `library(drake)`
 
 ---
@@ -489,6 +585,42 @@ class: left, middle
 - **Minimising** redundant computation → **caching** results.
 
 
+```
+yourproject/
+├── README.md
+├── runallscript
+├── code
+│   ├── A_dataprep.R
+│   ├── B_fit.R
+│   └── functions.R
+├── data
+│   ├── raw
+│   ├── processed
+│   ├── results
+├── report
+│   └── report.Rmd
+└── yourproject.Rproj
+```
+
+---
+class: left, middle
+
+## runall script in `.R`
+
+
+---
+class: left, middle
+
+## runall script in `.sh`
+
+---
+class: left, middle
+
+## Makefile
+
+↪ https://kbroman.org/minimal_make/
+
+- **build automation tool** that automatically builds targets
 
 ---
 class: left, middle
@@ -511,6 +643,8 @@ class: inverse, center, middle
 
 .large[Version control]
 
+---
+class: left, middle
 
 # Version control
 
@@ -560,6 +694,7 @@ class: left, middle
 
 - https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375986
 - https://benmarwick.github.io/UO-2018-On-Ramps-to-Reproducibility/UO-2018-On-Ramps-to-Reproducibility.html#1
+- cantabile
 
 ---
 class: left, middle
@@ -580,7 +715,6 @@ Slides: [https://sinarueeger.github.io/20181204-r-lunchs-gva/#1](https://sinarue
 
 Source code: [https://github.com/sinarueeger/20181204-r-lunchs-gva/](https://github.com/sinarueeger/20181204-r-lunchs-gva/)
 
-Examples: [https://github.com/sinarueeger/workflow-example](https://github.com/sinarueeger/workflow-example)
 
 `r icon::fa_twitter(colour = "white")`: [@sinarueeger](https://twitter.com/sinarueeger)
 ]
