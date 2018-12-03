@@ -1,8 +1,7 @@
 ---
 title: "Workflow & best practices for projects"
-subtitle: "Download example scripts here: [http://bit.ly/2O15oom](https://github.com/sinarueeger/workflow-example/)"
 author: "Sina Rüeger"
-date: "2018-12-04 (updated: `r Sys.Date()`)"
+date: "2018-12-04"#" (updated: `r Sys.Date()`)"
 output:
   xaringan::moon_reader:
     css: ["default-fonts", "default", "my-theme.css"]
@@ -46,7 +45,7 @@ class: left, middle
 
 - Background in Data Analysis & Engineering.
 
-- In the past: I worked as a research assistant in a data science environment, in epidemiology and in statistical genetics. 
+- In the past: I worked as a research assistant in data science, in epidemiology and in statistical genetics. 
 
 - Right now: PostDoc @ EPFL `r icon::ii_arrow_right_a()` Analysis of genetic data in infectious diseases at the [Fellay Lab](https://fellay-lab.epfl.ch/).
 
@@ -104,7 +103,7 @@ class: left, middle
 
 # Goal
 
-### 1. Getting the data analysis done.
+### 1. Figuring out stuff.
 
 ### 2. Telling others
 
@@ -184,7 +183,7 @@ exclude: true
 ---
 class: left, middle
 
-# Code recognition
+# Creating *reviewable* projects
 
 - Having an **overview of the analysis and its iteration steps** → cleaning, modelling, visualisation, reports.
 
@@ -205,15 +204,15 @@ class: left, middle
 
 > *Create the data you wish to see in the world* `r Citep(references, "wilson-etal-2017")`
 
-- Pay attention to variable names
-- Use a data dictionary / codebook (variable meta data)
-- Use and create analysis friendly data
+- Pay attention to **variable names**.
+- Use a **data dictionary** / codebook (variable meta data).
+- Use and create **analysis friendly** data.
 
 
 ---
 class: left, middle
 
-## `library(janitor)`
+## library(janitor)
 
 ```
 library(janitor)
@@ -254,14 +253,12 @@ class: left, middle
 
 ## Why styling code? 
 
-code can be misunderstood for two reasons: bad styling, bad coding
-
-code is reviewable: 
+Well *styled* code is easier reviewable. 
 
 ---
 class: left, middle
 
-## In-built options in RStudio
+## In-built options in RStudio (1/4)
 
 - **Reindent** Lines (Cmd+I) → proper indenting
 
@@ -272,7 +269,7 @@ class: left, middle
 ---
 class: left, middle
 
-## Style guides
+## Style guides (2/4)
 
 Styleguides: a set of opinionated rules. 
 
@@ -280,11 +277,10 @@ Styleguides: a set of opinionated rules.
 
 - [`library(styler)`](https://github.com/r-lib/styler)
 
-- [`library(lintr)`](https://github.com/jimhester/lintr) 
 ---
 class: left, middle
 
-### `library(formatr)`
+### library(formatr)
 
 Some more details on [Yihui Xie page](https://yihui.name/formatr/) and make sure you read *6. Further Notes* on what bad can happen. 
 
@@ -327,7 +323,7 @@ formatR::tidy_source("mycode.R", blank = FALSE, arrow = TRUE, width.cutoff = 50)
 ---
 class: left, middle
 
-### `library(styler)`
+### library(styler)
 
 - Follows tidyverse styling rules. 
 - RStudio add-in
@@ -336,24 +332,23 @@ class: left, middle
 styler::style_file("mycode.R")
 ```
 
+
 ---
 class: left, middle
 
-### `library(lintr)`
+## Liter for R code (3/4)
 
-→ pretty sophisticated, static code analysis
+- `library(lintr)`
+- pretty sophisticated, static code analysis
 
 ```{r,eval=FALSE}
 lintr::lint("mycode.R")
 ```
 
-
-
-
 ---
 class: left, middle
 
-### `libary(bannerCommenter)`
+## libary(bannerCommenter) (4/4)
 
 - For a consistent **commenting style**.
 
@@ -464,7 +459,7 @@ class: left, middle
 ---
 class: left, middle
 
-### [`library(ProjectTemplate)`](http://projecttemplate.net/architecture.html)
+### [library(ProjectTemplate)](http://projecttemplate.net/architecture.html)
 
 ---
 class: left, middle
@@ -478,10 +473,20 @@ class: left, middle
 
 ## Runall script
 
-- runall script in R
-- runall script in bash
-- `drake`
+- runall script in `.R`
+- runall script in `.sh`
+- `library(drake)`
 
+---
+class: left, middle
+
+## Helps you with
+
+- **Clear instructions** → one file should contain a sort of **recipe** of the analysis.
+
+- **Modular code** → using **functions** instead of free floating code.
+
+- **Minimising** redundant computation → **caching** results.
 
 
 
@@ -497,6 +502,8 @@ class: left, middle
   - https://github.com/jdblischak/workflowr
   - https://www.tidyverse.org/articles/2017/12/workflow-vs-script/
   - https://github.com/richfitz/remake
+  - `library(drake)`: [drake github repo](https://github.com/ropensci/drake)
+ and [my blogpost](https://sinarueeger.github.io/2018/10/09/workflow/).
 
 <!----------------------------------->
 ---
@@ -544,250 +551,6 @@ bannerCommenter::open_box("Variables need to be defined", bandChar = ":")
 ```
 
 
-
----
-class: left, middle
-
-# What we need
-
-- **Tidy folders**
-  - clear folder structure, e.g. `data`, `bin`, `code`, but not `data1`, `data2`, `code_old`
-  - only files with "purposes" (no `B_mod_old.R`)
-
-- **Clear instructions** → one file should contain a sort of **recipe** of the analysis.
-
-- **Modular code** → using **functions** instead of free floating code.
-
-- **Minimising** redundant computation → **caching** results.
-
-
----
-class: center, middle, inverse
-
-# What are the options?
-
-
----
-class: left, top
-
-# The default aka. wild west
-
-### Link to example
-
-[https://github.com/sinarueeger/workflow-example/tree/master/wild-west](https://github.com/sinarueeger/workflow-example/tree/master/wild-west)
-
-<!--- <img border="0" alt="" src="img/wildwest.png" width="500">------>
-
-### Folder structure
-
-```
-wild-west/
-├── code
-│   ├── A_dataprep.R
-│   ├── B_fit.R
-│   └── functions.R
-├── data
-│   ├── genotyping_data_subset_train.bim
-│   ├── genotyping_data_subset_train.raw
-│   └── training_set_details.txt
-├── report
-│   └── report.Rmd
-└── wild-west.Rproj
-```
-
-
----
-class: left, top
-
-# Wild west "pro"
-
-### Folder structure
-
-```
-wild-west-pro/
-├── README.md
-├── code
-│   ├── A_dataprep.R
-│   ├── B_fit.R
-│   └── functions.R
-├── data
-│   ├── genotyping_data_subset_train.bim
-│   ├── genotyping_data_subset_train.raw
-│   └── training_set_details.txt
-├── report
-│   └── report.Rmd
-└── wild-west-pro.Rproj
-```
-
---
-### + README file
-
-- **Problem**: the `README.md` file needs to be updated.
-
----
-class: left, top
-
-# make
-
-<img border="0" alt="" src="img/make.png" width="600">
-
-.small[From https://kbroman.org/minimal_make/]
-
-- Variations of make, e.g. `stu`.
-
-- **Problem**: what if colleagues don't know make?
-
-
----
-class: left, top
-
-# [Drake](https://github.com/ropensci/drake)
-
-- drake = Data Frames in R for Make
-
-- "general-purpose workflow manager for data-driven tasks"
-  - borrows some features from make
-  - caching of runs (future runs only start from the part where something has changed)
-  - scalable (parallel computing)
-  - supports easy maintainance of data analysis projects
-
-- [rOpenSci](https://ropensci.org/) package → code is reviewed
-
-- Created by [Will Landau](https://twitter.com/wmlandau), with contributions by many others.
-
-
----
-class: left, middle
-
-## `cd mini/` 
-
----
-class: left, top
-
-## Mini example to get familiar with drake (part 1)
-
-1. `install.packages("drake")`
-1. Check-out the different examples with `drake::drake_examples()`.
-1. Run `drake::drake_example("main")` → this will download a folder called `main`.
-1. `cd main/`
-
-```
-main/
-├── COPYRIGHT.md
-├── LICENSE.md
-├── README.md
-├── clean.R
-├── make.R
-├── raw_data.xlsx
-└── report.Rmd
-```
-
----
-class: left, top
-
-## Mini example to get familiar with drake (part 2)
-
-1. Open `make.R`: key components are `drake_plan()` and `make()`. 
-1. Add the following bit before and after `make(plan)`.
-```
-config <- drake_config(plan) 
-vis_drake_graph(config) 
-```
-1. Run all code for a first time.
-1. Change something (e.g. the plot function).
-1. Rerun and watch the colors change in `vis_drake_graph(config)`.
-1. Use functions `readd()` and `loadd()` to work with the produced output.
-
----
-class: left, middle
-
-## `cd drake-land/` 
-
----
-class: left, top
-
-## Example with our data
-
-### Link to example
-
-[https://github.com/sinarueeger/workflow-example/tree/master/drake-land](https://github.com/sinarueeger/workflow-example/tree/master/drake-land)
-
-### Folder structure
-
-```
-drake-land/
-├── data
-│   ├── genotyping_data_subset_train.bim
-│   ├── genotyping_data_subset_train.raw
-│   └── training_set_details.txt
-├── drake-land.Rproj
-├── functions.R
-├── make.R
-└── report.Rmd
-```
-
-
-
----
-class: left, top
-
-## More complex example
-
-What if you have folders, instead of a *flat* folder structure?
-
-### Link to example (*work-in-progress*)
-
-[https://github.com/sinarueeger/workflow-example/tree/master/drake-land-adv](https://github.com/sinarueeger/workflow-example/tree/master/drake-land-adv)
-
-
-```
-drake-land-adv/
-├── data
-│   ├── genotyping_data_subset_train.bim
-│   ├── genotyping_data_subset_train.raw
-│   └── training_set_details.txt
-├── src
-│   ├── functions.R
-│   ├── some-other-stuff.R
-├── report
-│   ├── drake-land-adv.Rproj
-│   ├── make.R
-│   ├── report.Rmd
-```
-
-<!---
-cat(
-  system(
-    "tree ../drake-land",
-    intern = TRUE),
-  sep = "\n"
-)
------>
-
-
----
-class: left, middle
-
-## .drake/
-
-
-
----
-class: left, top
-
-# Resources
-
-- [Github Repo](https://github.com/ropensci/drake)
-
-- [Best practices](https://ropensci.github.io/drake/articles/best-practices.html) for drake projects.
-
-- How drake compares to [similar work](https://github.com/ropensci/drake#similar-work).
-
-- Lots of [tutorials](https://github.com/ropensci/drake#tutorials) and [examples](https://github.com/ropensci/drake#examples).
-
-- Check-out [this tutorial](https://github.com/krlmlr/drake-sib-zurich) by [Kirill Müller](https://twitter.com/krlmlr).
-
-- [Cheatsheet](https://github.com/krlmlr/drake-sib-zurich/blob/master/cheat-sheet.pdf).
 
 
 ---
