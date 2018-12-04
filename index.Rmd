@@ -1,5 +1,6 @@
 ---
-title: "Workflow & best practices for projects"
+title: "Best practices for [TYPE] projects"
+subtitle: "TYPE: research / data analysis / scientific computing"
 author: "Sina Rüeger"
 date: "2018-12-04"#" (updated: `r Sys.Date()`)"
 output:
@@ -59,15 +60,15 @@ class: left, middle
 
 - [**R-Ladies Remote Journal Club**](https://twitter.com/acastillogill/status/1067699852048510976) where we discussed *Good enough practices in scientific computing* `r Citep(references, "wilson-etal-2017")`. 
 
-- **rOpenSci Community call**: *Code Review in the Lab* `r Citep(references, "ropensci-2018")` and the [summary](https://ropensci.org/blog/2018/11/29/codereview/) of it.
+- [**rOpenSci Community call**](https://ropensci.org/commcalls/2018-10-16/): *Code Review in the Lab* `r Citep(references, "ropensci-2018")` and the [summary](https://ropensci.org/blog/2018/11/29/codereview/) of it.
 
-- Plus all the [references](#references) listed throughout the presentation.
+- Plus all the references listed throughout the presentation.
 
 
 ---
 class: center, middle, inverse
 
-# Life cycle of projects
+# Life cycle of (data analysis driven research) projects
 
 
 ---
@@ -116,6 +117,17 @@ class: left, middle
 
 
 ---
+class: center, middle
+
+# ...extremely well organised scientists
+
+<a href="https://docs.google.com/presentation/d/1VK1hngMZSY3FT2SrDd4_AHiB28CHrsuSsaFr7r3SAL8/edit#slide=id.p">
+<img border="0" alt="" src="img/heidibaya.png" width="800">
+</a>
+
+.small[Extract from presentation by Heidi Seibold @HeidiBaya on [*Tools for reproducibility in Statistics and Machine Learning*](https://docs.google.com/presentation/d/1VK1hngMZSY3FT2SrDd4_AHiB28CHrsuSsaFr7r3SAL8/edit#slide=id.p)]
+
+---
 class: left, middle
 
 # Is that working? 
@@ -140,6 +152,8 @@ class: left, middle
 
 # Best practices
 
+.small[Box 1 from *Good enough practices in scientific computing* `r Citep(references, "wilson-etal-2017")`]
+
 .pull-left[
 <img border="0" alt="" src="img/bp-box1.png" width="400">
 ]
@@ -148,7 +162,7 @@ class: left, middle
 <img border="0" alt="" src="img/bp-box2.png" width="400">
 ]
 
-.small[Box 1 from *Good enough practices in scientific computing* `r Citep(references, "wilson-etal-2017")`]
+
 
 
 ---
@@ -165,16 +179,6 @@ class: left, middle
 .small[A selection from *Good enough practices in scientific computing* `r Citep(references, "wilson-etal-2017")`]
 
 
----
-class: center, middle
-
-# ...extremely well organised scientists
-
-<a href="https://docs.google.com/presentation/d/1VK1hngMZSY3FT2SrDd4_AHiB28CHrsuSsaFr7r3SAL8/edit#slide=id.p">
-<img border="0" alt="" src="img/heidibaya.png" width="800">
-</a>
-
-.small[Extract from presentation by Heidi Seibold @HeidiBaya on [*Tools for reproducibility in Statistics and Machine Learning*](https://docs.google.com/presentation/d/1VK1hngMZSY3FT2SrDd4_AHiB28CHrsuSsaFr7r3SAL8/edit#slide=id.p)]
 
 
 ---
@@ -262,14 +266,18 @@ write_delim(dat, path = "janitor-example.txt", delim = " ")
 
 ```
 
+```{r, message=FALSE, warning=FALSE, comment = ""}
+dat <- readr::read_delim("janitor-example.txt", delim = " ")
+tail(dat)
+```
+
 ---
 class: left, middle
 
 ### Remove empty columns and rows (1/3)
+### remove_empty()
 
-```{r, message=FALSE, warning=FALSE}
-dat <- readr::read_delim("janitor-example.txt", delim = " ")
-tail(dat)
+```{r, message=FALSE, warning=FALSE, comment = ""}
 dim(dat)
 dat.qc <- janitor::remove_empty(dat)
 dim(dat.qc)
@@ -280,8 +288,9 @@ dim(dat.qc)
 class: left, middle
 
 ### Identify duplicates row wise (2/3)
+### get_dupes()
 
-```{r}
+```{r, comment = ""}
 dat.qc.nodupl <- janitor::get_dupes(dat.qc, id)
 dat.qc.nodupl
 ```
@@ -290,9 +299,9 @@ dat.qc.nodupl
 class: left, middle
 
 ### Consistent variable names (3/3)
+### clean_names()
 
-
-```{r}
+```{r, comment = ""}
 dat.qc.nodupl %>% names()
 janitor::clean_names(dat.qc.nodupl, case = "snake") %>% names()
 janitor::clean_names(dat.qc.nodupl, case = "lower_camel") %>% names()
@@ -335,7 +344,7 @@ class: left, middle
 
 - **Reformat** Code (Cmd+Shift+A) → adds spaces, breaks long horizontal code
 
-- ↪ apply both with `mycode.R`
+- ↪ apply both with [`mycode.R`:](https://github.com/sinarueeger/20181204-r-lunchs-gva/blob/master/mycode.R) 
 
 
 
@@ -344,7 +353,7 @@ class: left, middle
 
 ## Style guides (2/4)
 
-Styleguides: a set of opinionated rules. 
+Style guides: a set of opinionated rules. 
 
 - [`library(formatr)`](https://yihui.name/formatr/) 
 
@@ -373,7 +382,6 @@ cols <- c("#88398A","#B07FB2","#F7CCA4","#C8C05E","#627C63") ## generated here: 
 
 ## colors
 set.seed(3)
-N=2000
 df=data.frame(x=runif(N), y =runif(N), col = sample(cols, N, replace = TRUE), size=runif(N, 1, 10))
 
 ## no border
@@ -399,7 +407,6 @@ make.background <- function(N, filename) {
         "#627C63")  ## generated here: http://colormind.io/
     ## colors
     set.seed(3)
-    N <- 2000
     df <- data.frame(x = runif(N), y = runif(N), col = sample(cols, 
         N, replace = TRUE), size = runif(N, 1, 10))
     ## no border
@@ -420,9 +427,9 @@ class: left, middle
 
 - RStudio add-in
 
-  - ↪ `mycode.R`: select parts, apply `style selection`
+  - ↪ [`mycode.R`:](https://github.com/sinarueeger/20181204-r-lunchs-gva/blob/master/mycode.R) select parts, apply `style selection`
 
-  - ↪ `mycode.R`: apply `style active file`
+  - ↪ [`mycode.R`:](https://github.com/sinarueeger/20181204-r-lunchs-gva/blob/master/mycode.R): apply `style active file`
 
 
 
@@ -516,6 +523,33 @@ class: left, middle
 - *bandChar*: type of character
 
    
+   
+---
+class: left, middle
+
+### Tip: Make it a habit using gist.github.io
+
+For example: https://gist.github.com/sinarueeger/ee42a74cbcb1d834e906199b26bc19f0
+
+```
+## Add banner comments to R scripts using 
+## [bannerCommenter](https://cran.r-project.org/web/packages/bannerCommenter/vignettes/Banded_comment_maker.pdf).
+
+## header -----------------------------
+bannerCommenter::banner("G2G-EBV analysis using GASTON", emph = TRUE)
+
+## section -----------------------------
+bannerCommenter::banner("0. Setup", centre = TRUE, bandChar = "/")
+
+## subsection -----------------------------
+bannerCommenter::banner("0.1 Setup", centre = FALSE, bandChar = "-")
+
+## note -----------------------------
+bannerCommenter::open_box("Variables need to be defined", bandChar = ":")
+
+```
+
+
 ---
 class: left, middle
 
@@ -526,6 +560,7 @@ class: left, middle
 - More about style guides: 
   - http://adv-r.had.co.nz/Style.html
   - http://jef.works/R-style-guide/#file-names
+  - https://nicercode.github.io/intro/bad-habits.html
 
 
  
@@ -534,6 +569,18 @@ class: left, middle
 class: inverse, center, middle
 
 .large[Project management]
+
+
+---
+class: left, middle
+
+### R package folder structure
+
+<a href="http://r-pkgs.had.co.nz/package.html">
+<img border="0" alt="" src="img/package-files.png" width="500">
+</a>
+
+.small[Figure from http://r-pkgs.had.co.nz/package.html.]
 
 
 ---
@@ -548,18 +595,6 @@ class: left, middle
 
 - Directory structure
 - Setup git 
-
----
-class: left, middle
-
-### R package folder structure
-
-<a href="http://r-pkgs.had.co.nz/package.html">
-<img border="0" alt="" src="img/package-files.png" width="500">
-</a>
-
-.small[Figure from http://r-pkgs.had.co.nz/package.html.]
-
 
 
 ---
@@ -688,7 +723,7 @@ class: left, middle
 
 ### Self baked
 
-
+.pull-left[
 ```
 yourproject/
 ├── README.md
@@ -696,35 +731,31 @@ yourproject/
 ├── data
 │   ├── raw
 │   ├── processed
-│   ├── results
-├── docs
+│   └── results
+├── doc
 ├── img
 ├── src
 │   ├── A_dataprep.R
 │   ├── B_fit.R
 │   └── functions.R
-├── reports
+├── report
 │   ├── report-intro.Rmd
 │   └── report-analysis.Rmd
 └── yourproject.Rproj
 ```
+]
 
-
+.pull-right[
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">src/ : folder for scripts<br>data/ : original data pulled from database<br>output/ : intermediate RDS data objects needed for Rmd<br>analysis/: Rmd files and HTML output<br>doc/ : any long-form notes to self or documentation<br>ext/: external images or other random files I want to keep in proj</p>&mdash; Emily Riederer (@EmilyRiederer) <a href="https://twitter.com/EmilyRiederer/status/1038982918033604609?ref_src=twsrc%5Etfw">September 10, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+]
 
 ---
 class: left, middle
 
 ## Runall script (2/2)
 
-- runall script in `.R`
-- runall script in `.sh`
-- Makefile
-- `library(drake)`
-
----
-class: left, middle
-
-## Helps you with
+Helps you with:
 
 - **Clear instructions** → one file should contain a sort of **recipe** of the analysis.
 
@@ -732,6 +763,17 @@ class: left, middle
 
 - **Minimising** redundant computation → **caching** results.
 
+
+---
+class: left, middle
+
+### Types
+
+- runall script in `.R`
+
+- runall script in `.sh`
+
+- Makefile
 
 ```
 yourproject/
@@ -750,8 +792,8 @@ class: left, middle
 ```
 source("src/A_dataprep.R")
 source("src/B_fit.R")
-rmarkdown::render("reports/report-intro.Rmd")
-rmarkdown::render("reports/report-analyis.Rmd")
+rmarkdown::render("report/report-intro.Rmd")
+rmarkdown::render("report/report-analyis.Rmd")
 ```
 
 ---
@@ -766,9 +808,12 @@ class: left, middle
 
 Rscript --vanilla src/A_dataprep.R
 Rscript --vanilla src/B_fit.R
-Rscript --vanilla -e "rmarkdown::render(\"reports/report-intro.Rmd\")"
-Rscript --vanilla -e "rmarkdown::render(\"reports/report-analyis.Rmd\")"
+Rscript --vanilla -e "rmarkdown::render(\"report/report-intro.Rmd\")"
+Rscript --vanilla -e "rmarkdown::render(\"report/report-analyis.Rmd\")"
 ```
+
+- In terminal run `chmod a+x runall.sh` to make it executable. 
+- Run it with `./runall.sh`
 
 ---
 class: left, middle
@@ -785,14 +830,9 @@ class: left, middle
 
 ## More
 
-- Project directory: 
-  - https://nicercode.github.io/about/
-  - https://twitter.com/EmilyRiederer/status/1038982918033604609?s=09
-- Runall script: 
-  - https://github.com/jdblischak/workflowr
-  - https://www.tidyverse.org/articles/2017/12/workflow-vs-script/
-  - https://github.com/richfitz/remake
-  - `library(drake)`: [drake github repo](https://github.com/ropensci/drake)
+- [`library(workflowr)`](https://github.com/jdblischak/workflowr): similar to `pRojects` and `projectTemplate`.
+- [`library(remake)`](https://github.com/richfitz/remake): Make-like declarative runall scripts.
+- `library(drake)`: [drake github repo](https://github.com/ropensci/drake)
  and [my blogpost](https://sinarueeger.github.io/2018/10/09/workflow/).
 
 <!----------------------------------->
@@ -810,46 +850,7 @@ class: left, middle
 
 - Get private folders (free for students at github)
 
-
-<!----------------------------------->
----
-class: inverse, center, middle
-
-.large[Tips]
-
-
----
-class: left, middle
-
-# 1. Work with others
-
-
----
-class: left, middle
-
-# 2. Use gist.github.io
-
-to memorise stuff, see https://gist.github.com/sinarueeger/ee42a74cbcb1d834e906199b26bc19f0
-
-```
-## Add banner comments to R scripts using 
-## [bannerCommenter](https://cran.r-project.org/web/packages/bannerCommenter/vignettes/Banded_comment_maker.pdf).
-
-## header -----------------------------
-bannerCommenter::banner("G2G-EBV analysis using GASTON", emph = TRUE)
-
-## section -----------------------------
-bannerCommenter::banner("0. Setup", centre = TRUE, bandChar = "/")
-
-## subsection -----------------------------
-bannerCommenter::banner("0.1 Setup", centre = FALSE, bandChar = "-")
-
-## note -----------------------------
-bannerCommenter::open_box("Variables need to be defined", bandChar = ":")
-
-```
-
-
+- Work with others
 
 
 ---
@@ -857,15 +858,15 @@ class: left, middle
 
 # More
 
-## `library(rrtools)`: Packaging Data Analytical Work
+## library(rrtools): Packaging Data Analytical Work
 
-- [**Packaging Data Analytical Work Reproducibly Using R (and Friends)**](https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375986)
+- [**Packaging Data Analytical Work Reproducibly Using R (and Friends)**](https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375986) (article)
 
-- [**An introduction to rrtools**](https://benmarwick.github.io/UO-2018-On-Ramps-to-Reproducibility/UO-2018-On-Ramps-to-Reproducibility.html#1)
+- [**An introduction to rrtools**](https://benmarwick.github.io/UO-2018-On-Ramps-to-Reproducibility/UO-2018-On-Ramps-to-Reproducibility.html#1) (presentation)
 
 ## Talk by Charles T. Gray
 
-Presentation by [Charles T. Gray](https://twitter.com/cantabile) about *Open and Reproducible Data Analysis*](http://cantabile.rbind.io/talks/replication/marseille-2018.html#1) (at Young Bayesians and Big Data for Social Good 2018, CIRM, Marseille).
+Presentation by [Charles T. Gray](https://twitter.com/cantabile) about [*Open and Reproducible Data Analysis*](http://cantabile.rbind.io/talks/replication/marseille-2018.html#1) (at Young Bayesians and Big Data for Social Good 2018, CIRM, Marseille).
 
 ---
 class: left, middle
