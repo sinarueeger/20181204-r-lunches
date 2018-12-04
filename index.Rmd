@@ -1,6 +1,6 @@
 ---
-title: "Best practices for data analysis projects"
-subtitle: "Material here: https://bit.ly/2QfkOGZ"
+title: "Best practices for [TYPE] projects"
+subtitle: "TYPE: research / data analysis / scientific computing"
 author: "Sina Rüeger"
 date: "2018-12-04"#" (updated: `r Sys.Date()`)"
 output:
