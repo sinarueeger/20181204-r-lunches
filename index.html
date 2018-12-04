@@ -22,7 +22,6 @@ class: top, right, title-slide
 ---
 
 
-&lt;!-- 
 &lt;!-- From here: https://slides.yihui.name/xaringan/ --&gt;
 
 
@@ -623,7 +622,7 @@ class: inverse, center, middle
 ---
 class: left, middle
 
-## Setting up a project
+## Setting up a project (1/2)
 
 
 1. [`library(ProjectTemplate)`](http://projecttemplate.net/architecture.html)
@@ -649,7 +648,7 @@ class: left, middle
 ---
 class: left, middle
 
-### library(ProjectTemplate)
+### library(ProjectTemplate) 
 
 - ↪ http://projecttemplate.net/architecture.html
 
@@ -803,7 +802,7 @@ yourproject/
 ---
 class: left, middle
 
-## Runall script
+## Runall script (2/2)
 
 - runall script in `.R`
 - runall script in `.sh`
@@ -834,7 +833,7 @@ class: left, middle
 
 ## runall script in `.R`
 
-`runall.R`
+`runall.R`:
 
 ```
 source("src/A_dataprep.R")
@@ -848,7 +847,7 @@ class: left, middle
 
 ## runall script in `.sh`
 
-`runall.sh`
+`runall.sh`:
 
 ```
 #!/bin/bash
@@ -864,9 +863,10 @@ class: left, middle
 
 ## Makefile
 
-↪ https://kbroman.org/minimal_make/
-
 - **build automation tool** that automatically builds targets
+
+- ↪ https://kbroman.org/minimal_make/
+
 
 ---
 class: left, middle
@@ -900,17 +900,24 @@ class: left, middle
 
 
 &lt;!-----------------------------------&gt;
+---
+class: inverse, center, middle
+
+.large[Tips]
+
 
 ---
 class: left, middle
 
-# Tips
-
-1. Work with others
-
-1. Use gist.github.io to memorise stuff, see https://gist.github.com/sinarueeger/ee42a74cbcb1d834e906199b26bc19f0
+# 1. Work with others
 
 
+---
+class: left, middle
+
+# 2. Use gist.github.io
+
+to memorise stuff, see https://gist.github.com/sinarueeger/ee42a74cbcb1d834e906199b26bc19f0
 
 ```
 ## Add banner comments to R scripts using 
