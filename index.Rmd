@@ -1,6 +1,6 @@
 ---
-title: "Best practices for [TYPE] projects"
-subtitle: "TYPE: research / data analysis / scientific computing"
+title: "Best practices for data analysis projects"
+subtitle: "Material here: https://bit.ly/2QfkOGZ"
 author: "Sina Rüeger"
 date: "2018-12-04"#" (updated: `r Sys.Date()`)"
 output:
@@ -45,9 +45,13 @@ class: left, middle
 - janitor
 - formatr
 - styler
-- bannerCommmenter
+- bannerCommenter
 - pRojects
 - projectTemplate
+
+# Material
+https://bit.ly/2QfkOGZ
+
 
 ---
 class: left, middle
@@ -138,13 +142,7 @@ class: center, middle
 
 .small[Extract from presentation by Heidi Seibold @HeidiBaya on [*Tools for reproducibility in Statistics and Machine Learning*](https://docs.google.com/presentation/d/1VK1hngMZSY3FT2SrDd4_AHiB28CHrsuSsaFr7r3SAL8/edit#slide=id.p)]
 
----
-class: left, middle
 
-# Is that working? 
-
-
-.small[*Enhancing reproducibility for computational methods* `r Citep(references, "stodden-etal-2016")`]
 
 ---
 class: left, middle 
@@ -237,13 +235,11 @@ class: left, middle
 
 ## Create data
 
-> *Create the data you wish to see in the world* `r Citep(references, "wilson-etal-2017")`
+- *"Create the data you wish to see in the world"*" `r Citep(references, "wilson-etal-2017")`
 
 - Pay attention to **variable names**.
 
 - Use a **data dictionary** / codebook (variable meta data).
-
-- Use and create **analysis friendly** data.
 
 
 ---
@@ -264,14 +260,14 @@ dat <- iris %>% mutate(` `=NA) %>%
   rownames_to_column("id") %>% rbind(c(NA, NA, NA, NA, NA, NA), c(NA, NA, NA, NA, NA, NA)) 
 
 ## rename columns
-dat <- dat %>% rename(sepal.length=Sepal.Length, `Sepal-Width`=Sepal.Width, Petal_WIDTH = Petal.Width)
+dat <- dat %>% rename(sepal.length=Sepal.Length, `Sepal Width`=Sepal.Width, Petal_WIDTH = Petal.Width)
 
 ## select duplicates
-dupl <- dat %>% slice(c(33, 126))
+#dupl <- dat %>% slice(c(33, 126))
 ## relabel id
-dupl$id <- c(31, 130)
+#dupl$id <- c(31, 130)
 ## add tuplicates
-dat <- dat %>% rbind(dupl)
+#dat <- dat %>% rbind(dupl)
 
 write_delim(dat, path = "janitor-example.txt", delim = " ")
 
@@ -290,20 +286,8 @@ class: left, middle
 
 ```{r, message=FALSE, warning=FALSE, comment = ""}
 dim(dat)
-dat.qc <- janitor::remove_empty(dat)
-dim(dat.qc)
+janitor::remove_empty(dat) %>% dim()
 
-```
-
----
-class: left, middle
-
-### Identify duplicates row wise (2/3)
-### get_dupes()
-
-```{r, comment = ""}
-dat.qc.nodupl <- janitor::get_dupes(dat.qc, id)
-dat.qc.nodupl
 ```
 
 ---
@@ -313,9 +297,9 @@ class: left, middle
 ### clean_names()
 
 ```{r, comment = ""}
-dat.qc.nodupl %>% names()
-janitor::clean_names(dat.qc.nodupl, case = "snake") %>% names()
-janitor::clean_names(dat.qc.nodupl, case = "lower_camel") %>% names()
+dat %>% names()
+janitor::clean_names(dat, case = "snake") %>% names()
+janitor::clean_names(dat, case = "lower_camel") %>% names()
 ```
 
 
@@ -375,7 +359,7 @@ class: left, middle
 
 ### library(formatr)
 
-Some more details on [Yihui Xie page](https://yihui.name/formatr/)^[Make sure you read *6. Further Notes* about all the bad things that can happen.].
+Some more details on [Yihui Xie page](https://yihui.name/formatr/) (make sure you read *6. Further Notes* about all the bad things that can happen).
 
 - `formatR::tidy_file("mycode.R")` will change the R file
 
@@ -393,7 +377,7 @@ cols <- c("#88398A","#B07FB2","#F7CCA4","#C8C05E","#627C63") ## generated here: 
 
 ## colors
 set.seed(3)
-df=data.frame(x=runif(N), y =runif(N), col = sample(cols, N, replace = TRUE), size=runif(N, 1, 10))
+df=data.fame(x=runif(N), y =runif(N), col = sample(cols, N, replace = TRUE), size=runif(N, 1, 10))
 
 ## no border
 qp <- ggplot(df, aes(x, y))+ geom_point(aes(size =size, fill =I(col), color = I(col)), alpha = 0.4, shape = 16)+theme_void()+theme(legend.position="none")+scale_size_continuous(range = c(1, 30))
@@ -420,7 +404,7 @@ make.background <- function(N, filename) {
         "#627C63")  ## generated here: http://colormind.io/
     ## colors
     set.seed(3)
-    df <- data.frame(x = runif(N), y = runif(N), col = sample(cols, 
+    df <- data.fame(x = runif(N), y = runif(N), col = sample(cols, 
         N, replace = TRUE), size = runif(N, 1, 10))
     ## no border
     qp <- ggplot(df, aes(x, y)) + geom_point(aes(size = size, 
@@ -540,7 +524,7 @@ class: left, middle
 ---
 class: left, middle
 
-### Tip: Make it a habit using gist.github.io
+### Tip: Make it a habit using gist.github.com
 
 For example: https://gist.github.com/sinarueeger/ee42a74cbcb1d834e906199b26bc19f0
 
@@ -581,7 +565,7 @@ class: left, middle
 ---
 class: inverse, center, middle
 
-.large[Project management]
+.large[Project organisation]
 
 
 ---
@@ -771,9 +755,9 @@ class: left, middle
 
 Helps you with:
 
-- **Clear instructions** → one file should contain a sort of **recipe** of the analysis.
+- **Clear instructions** → contains a sort of **recipe** of the analysis.
 
-- **Modular code** → using **functions** instead of free floating code.
+- **Modular code** → makes you use **functions** instead of free floating code.
 
 - (**Minimising** redundant computation → **caching** results.)
 
@@ -849,7 +833,9 @@ class: left, middle
 ## More
 
 - [`library(workflowr)`](https://github.com/jdblischak/workflowr): similar to `pRojects` and `projectTemplate`.
+
 - [`library(remake)`](https://github.com/richfitz/remake): Make-like declarative runall scripts.
+
 - `library(drake)`: [drake github repo](https://github.com/ropensci/drake)
  and [my blogpost](https://sinarueeger.github.io/2018/10/09/workflow/).
 
@@ -876,15 +862,18 @@ class: left, middle
 
 # More
 
-## library(rrtools): Packaging Data Analytical Work
+### library(rrtools): Packaging Data Analytical Work
 
-- [**Packaging Data Analytical Work Reproducibly Using R (and Friends)**](https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375986) (article)
+- [*Packaging Data Analytical Work Reproducibly Using R (and Friends)*](https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375986) (article)
 
-- [**An introduction to rrtools**](https://benmarwick.github.io/UO-2018-On-Ramps-to-Reproducibility/UO-2018-On-Ramps-to-Reproducibility.html#1) (presentation)
+- [*An introduction to rrtools*](https://benmarwick.github.io/UO-2018-On-Ramps-to-Reproducibility/UO-2018-On-Ramps-to-Reproducibility.html#1) (presentation)
 
-## Talk by Charles T. Gray
+### Talk by Charles T. Gray
 
 Presentation by [Charles T. Gray](https://twitter.com/cantabile) about [*Open and Reproducible Data Analysis*](http://cantabile.rbind.io/talks/replication/marseille-2018.html#1) (at Young Bayesians and Big Data for Social Good 2018, CIRM, Marseille).
+
+### Article
+[*Enhancing reproducibility for computational methods*](http://science.sciencemag.org/content/354/6317/1240.full.pdf) `r Citep(references, "stodden-etal-2016")`.
 
 ---
 class: left, middle
