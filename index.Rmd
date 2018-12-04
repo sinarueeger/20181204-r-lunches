@@ -37,6 +37,17 @@ BibOptions(check.entries = FALSE,
 references <- ReadBib("references.bib", check = FALSE)
 ```
 
+---
+class: left, middle
+
+# install.packages(...)
+
+- janitor
+- formatr
+- styler
+- bannerCommmenter
+- pRojects
+- projectTemplate
 
 ---
 class: left, middle
@@ -298,7 +309,7 @@ dat.qc.nodupl
 ---
 class: left, middle
 
-### Consistent variable names (3/3)
+### Apply cnsistent variable naming (3/3)
 ### clean_names()
 
 ```{r, comment = ""}
@@ -344,7 +355,7 @@ class: left, middle
 
 - **Reformat** Code (Cmd+Shift+A) → adds spaces, breaks long horizontal code
 
-- ↪ apply both with [`mycode.R`:](https://github.com/sinarueeger/20181204-r-lunchs-gva/blob/master/mycode.R) 
+- ↪ apply both in [`mycode.R`:](https://github.com/sinarueeger/20181204-r-lunchs-gva/blob/master/mycode.R) 
 
 
 
@@ -364,7 +375,7 @@ class: left, middle
 
 ### library(formatr)
 
-Some more details on [Yihui Xie page](https://yihui.name/formatr/). Make sure you read *6. Further Notes* about all the bad things that can happen. 
+Some more details on [Yihui Xie page](https://yihui.name/formatr/)^[Make sure you read *6. Further Notes* about all the bad things that can happen.].
 
 - `formatR::tidy_file("mycode.R")` will change the R file
 
@@ -391,15 +402,17 @@ return(qp)
 }
 ```
 
+### Apply formatr::tidy_source()
+
+```{r, comment="", eval =F}
+formatR::tidy_source("mycode.R", blank = FALSE, arrow = TRUE, width.cutoff = 50)
+```
 
 ---
 class: left, middle
 
 ### Better code
 
-```{r, comment="", eval =F}
-formatR::tidy_source("mycode.R", blank = FALSE, arrow = TRUE, width.cutoff = 50)
-```
 
 ```{r, eval = FALSE}
 make.background <- function(N, filename) {
@@ -594,7 +607,8 @@ class: left, middle
 2. [`library(pRojects)`](https://itsalocke.com/projects/)
 
 - Directory structure
-- Setup git 
+- Set up version control
+- ...
 
 
 ---
@@ -761,11 +775,20 @@ Helps you with:
 
 - **Modular code** → using **functions** instead of free floating code.
 
-- **Minimising** redundant computation → **caching** results.
+- (**Minimising** redundant computation → **caching** results.)
 
 
 ---
 class: left, middle
+
+### Where
+
+```
+yourproject/
+├── README.md
+├── runall
+...
+```
 
 ### Types
 
@@ -775,12 +798,7 @@ class: left, middle
 
 - Makefile
 
-```
-yourproject/
-├── README.md
-├── runall
-...
-```
+
 
 ---
 class: left, middle
@@ -820,7 +838,7 @@ class: left, middle
 
 ## Makefile
 
-- **build automation tool** that automatically builds targets
+- **Build automation tool** that automatically builds targets
 
 - ↪ https://kbroman.org/minimal_make/
 
@@ -848,7 +866,7 @@ class: left, middle
 
 - http://happygitwithr.com/bingo.html
 
-- Get private folders (free for students at github)
+- Get private folders (free for students on github)
 
 - Work with others
 
